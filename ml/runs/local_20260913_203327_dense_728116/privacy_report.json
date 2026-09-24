@@ -1,0 +1,9 @@
+{
+  "privacy_enabled": true,
+  "dp_mode": "opacus",
+  "formal_accounting": true,
+  "epsilon_spent": 5.15863635357371,
+  "delta": 1e-05,
+  "performance_tradeoff": "Formal DP may reduce model precision.",
+  "limitations": "Model evaluated centrally. Secure Aggregation not used."
+}

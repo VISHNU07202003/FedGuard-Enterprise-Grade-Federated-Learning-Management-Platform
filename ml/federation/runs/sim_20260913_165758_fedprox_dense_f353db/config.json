@@ -1,0 +1,7 @@
+{
+  "strategy": "fedprox",
+  "model": "dense",
+  "num_clients": 3,
+  "rounds": 3,
+  "proximal_mu": 0.1
+}

@@ -1,0 +1,29 @@
+{
+  "title": "FedGuard Overview",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "API Request Rate",
+      "targets": [{"expr": "rate(fedguard_api_requests_total[1m])", "legendFormat": "{{route}} - {{status_code}}"}],
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8}
+    },
+    {
+      "type": "timeseries",
+      "title": "API Error Rate",
+      "targets": [{"expr": "rate(fedguard_api_errors_total[1m])"}],
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8}
+    },
+    {
+      "type": "stat",
+      "title": "Active Edge Devices",
+      "targets": [{"expr": "sum(fedguard_edge_availability_rate)"}],
+      "gridPos": {"x": 0, "y": 8, "w": 8, "h": 6}
+    },
+    {
+      "type": "stat",
+      "title": "Federation Rounds",
+      "targets": [{"expr": "sum(fedguard_federation_rounds_total)"}],
+      "gridPos": {"x": 8, "y": 8, "w": 8, "h": 6}
+    }
+  ]
+}

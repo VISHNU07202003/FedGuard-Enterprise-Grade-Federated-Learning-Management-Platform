@@ -1,0 +1,8 @@
+{
+  "strategy": "fedavg",
+  "model": "dense",
+  "num_clients": 10,
+  "rounds": 3,
+  "proximal_mu": 0.01,
+  "track_mlflow": true
+}

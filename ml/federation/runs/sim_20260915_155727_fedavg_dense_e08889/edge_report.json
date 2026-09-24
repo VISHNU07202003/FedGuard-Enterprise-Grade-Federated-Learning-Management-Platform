@@ -1,0 +1,6 @@
+{
+  "run_id": "sim_20260915_155727_fedavg_dense_e08889",
+  "edge_simulation": "enabled",
+  "device_profile_count": 10,
+  "summary": "Simulated heterogeneous edge-device behavior."
+}

@@ -1,0 +1,9 @@
+{
+  "model": "transformer",
+  "client_id": null,
+  "epochs": 5,
+  "batch_size": 256,
+  "lr": 0.001,
+  "input_dim": 738,
+  "training_time": 10.988570213317871
+}

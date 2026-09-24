@@ -1,0 +1,317 @@
+{
+  "run_id": "sim_20260913_185929_fedavg_dense_396a10",
+  "rounds": [
+    {
+      "round": 1,
+      "clients_selected": 10,
+      "clients_completed": 6,
+      "clients_failed": 0,
+      "clients_rejected": 1,
+      "clients_timed_out": 0,
+      "straggler_count": 1,
+      "completion_rate": 0.6,
+      "dropout_rate": 0.2,
+      "round_status": "partial_success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_002",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_004",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_005",
+          "status": "rejected",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": false,
+          "rejected_reason": "invalid_update_nan",
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_006",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_007",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": true,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 1.5
+        },
+        {
+          "client_id": "client_008",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_009",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_010",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "clients_selected": 10,
+      "clients_completed": 6,
+      "clients_failed": 0,
+      "clients_rejected": 1,
+      "clients_timed_out": 0,
+      "straggler_count": 1,
+      "completion_rate": 0.6,
+      "dropout_rate": 0.2,
+      "round_status": "partial_success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_003",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_004",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_005",
+          "status": "rejected",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": false,
+          "rejected_reason": "invalid_update_nan",
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_006",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_007",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": true,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 1.5
+        },
+        {
+          "client_id": "client_008",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_009",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_010",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "clients_selected": 10,
+      "clients_completed": 6,
+      "clients_failed": 0,
+      "clients_rejected": 1,
+      "clients_timed_out": 0,
+      "straggler_count": 0,
+      "completion_rate": 0.6,
+      "dropout_rate": 0.2,
+      "round_status": "partial_success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_004",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_005",
+          "status": "rejected",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": false,
+          "rejected_reason": "invalid_update_nan",
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_006",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_007",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_008",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_009",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_010",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        }
+      ]
+    }
+  ]
+}

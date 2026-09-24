@@ -1,0 +1,87 @@
+{
+  "run_id": "sim_20260913_203812_fedavg_dense_f95a60",
+  "rounds": [
+    {
+      "round": 1,
+      "clients_selected": 3,
+      "clients_completed": 3,
+      "clients_failed": 0,
+      "clients_rejected": 0,
+      "clients_timed_out": 0,
+      "straggler_count": 0,
+      "completion_rate": 1.0,
+      "dropout_rate": 0.0,
+      "round_status": "success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "clients_selected": 3,
+      "clients_completed": 3,
+      "clients_failed": 0,
+      "clients_rejected": 0,
+      "clients_timed_out": 0,
+      "straggler_count": 0,
+      "completion_rate": 1.0,
+      "dropout_rate": 0.0,
+      "round_status": "success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        }
+      ]
+    }
+  ]
+}

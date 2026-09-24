@@ -1,0 +1,9 @@
+{
+  "privacy_enabled": true,
+  "dp_mode": "opacus",
+  "formal_accounting": true,
+  "epsilon_spent": 5.583080643704751,
+  "delta": 1e-05,
+  "performance_tradeoff": "Formal DP reduces model precision; clipping restricts influence.",
+  "limitations": "Model evaluated centrally. Secure Aggregation not used due to simulation loop constraints."
+}

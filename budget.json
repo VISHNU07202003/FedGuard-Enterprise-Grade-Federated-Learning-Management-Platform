@@ -1,0 +1,9 @@
+{
+  "BudgetName": "FedGuard-Demo-Budget",
+  "BudgetLimit": {
+    "Amount": "5.0",
+    "Unit": "USD"
+  },
+  "BudgetType": "COST",
+  "TimeUnit": "MONTHLY"
+}

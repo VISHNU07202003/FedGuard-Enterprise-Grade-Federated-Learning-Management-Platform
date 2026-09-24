@@ -1,0 +1,9 @@
+{
+  "model": "dense",
+  "client_id": null,
+  "epochs": 5,
+  "batch_size": 256,
+  "lr": 0.001,
+  "input_dim": 31,
+  "training_time": 2.4697186946868896
+}

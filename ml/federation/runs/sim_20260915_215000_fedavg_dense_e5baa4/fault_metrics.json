@@ -1,0 +1,253 @@
+{
+  "run_id": "sim_20260915_215000_fedavg_dense_e5baa4",
+  "rounds": [
+    {
+      "round": 1,
+      "clients_selected": 5,
+      "clients_completed": 5,
+      "clients_failed": 0,
+      "clients_rejected": 0,
+      "clients_timed_out": 0,
+      "straggler_count": 0,
+      "completion_rate": 1.0,
+      "dropout_rate": 0.1,
+      "round_status": "success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.1,
+          "simulated_communication_time": 0.582
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.0625,
+          "simulated_communication_time": 0.2988
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.0417,
+          "simulated_communication_time": 0.0324
+        },
+        {
+          "client_id": "client_004",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.1667,
+          "simulated_communication_time": 0.7837
+        },
+        {
+          "client_id": "client_005",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05
+        }
+      ],
+      "edge_summary": {
+        "average_latency_ms": 175.0,
+        "average_bandwidth_mbps": 135.0,
+        "battery_skipped_clients": 0,
+        "availability_rate": 1.0,
+        "edge_straggler_count": 0,
+        "edge_client_results": [
+          {
+            "client_id": "client_001",
+            "device_type": "smart_factory_sensor",
+            "cpu_class": "low",
+            "memory_mb": 512,
+            "network_latency_ms": 200,
+            "bandwidth_mbps": 10,
+            "battery_level": 68.10715704740471,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.1,
+            "simulated_communication_time": 0.582,
+            "total_client_time": 0.682
+          },
+          {
+            "client_id": "client_002",
+            "device_type": "building_controller",
+            "cpu_class": "medium",
+            "memory_mb": 2048,
+            "network_latency_ms": 120,
+            "bandwidth_mbps": 25,
+            "battery_level": null,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.0625,
+            "simulated_communication_time": 0.2988,
+            "total_client_time": 0.3613
+          },
+          {
+            "client_id": "client_003",
+            "device_type": "edge_cluster",
+            "cpu_class": "high",
+            "memory_mb": 8192,
+            "network_latency_ms": 30,
+            "bandwidth_mbps": 500,
+            "battery_level": null,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.0417,
+            "simulated_communication_time": 0.0324,
+            "total_client_time": 0.074
+          },
+          {
+            "client_id": "client_004",
+            "device_type": "low_power_iot_node",
+            "cpu_class": "low",
+            "memory_mb": 256,
+            "network_latency_ms": 350,
+            "bandwidth_mbps": 5,
+            "battery_level": 53.204649397253405,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.1667,
+            "simulated_communication_time": 0.7837,
+            "total_client_time": 0.9504
+          }
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "clients_selected": 5,
+      "clients_completed": 3,
+      "clients_failed": 0,
+      "clients_rejected": 0,
+      "clients_timed_out": 0,
+      "straggler_count": 0,
+      "completion_rate": 0.6,
+      "dropout_rate": 0.1,
+      "round_status": "partial_success",
+      "client_metrics": [
+        {
+          "client_id": "client_001",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.1,
+          "simulated_communication_time": 0.5776
+        },
+        {
+          "client_id": "client_002",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.0625,
+          "simulated_communication_time": 0.2947
+        },
+        {
+          "client_id": "client_003",
+          "status": "completed",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.05,
+          "simulated_training_time": 0.0417,
+          "simulated_communication_time": 0.0339
+        },
+        {
+          "client_id": "client_004",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        },
+        {
+          "client_id": "client_005",
+          "status": "dropout",
+          "failure_reason": null,
+          "is_straggler": false,
+          "update_valid": true,
+          "rejected_reason": null,
+          "duration": 0.0
+        }
+      ],
+      "edge_summary": {
+        "average_latency_ms": 116.67,
+        "average_bandwidth_mbps": 178.33,
+        "battery_skipped_clients": 0,
+        "availability_rate": 1.0,
+        "edge_straggler_count": 0,
+        "edge_client_results": [
+          {
+            "client_id": "client_001",
+            "device_type": "smart_factory_sensor",
+            "cpu_class": "low",
+            "memory_mb": 512,
+            "network_latency_ms": 200,
+            "bandwidth_mbps": 10,
+            "battery_level": 59.75009431190108,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.1,
+            "simulated_communication_time": 0.5776,
+            "total_client_time": 0.6776
+          },
+          {
+            "client_id": "client_002",
+            "device_type": "building_controller",
+            "cpu_class": "medium",
+            "memory_mb": 2048,
+            "network_latency_ms": 120,
+            "bandwidth_mbps": 25,
+            "battery_level": null,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.0625,
+            "simulated_communication_time": 0.2947,
+            "total_client_time": 0.3572
+          },
+          {
+            "client_id": "client_003",
+            "device_type": "edge_cluster",
+            "cpu_class": "high",
+            "memory_mb": 8192,
+            "network_latency_ms": 30,
+            "bandwidth_mbps": 500,
+            "battery_level": null,
+            "available": true,
+            "availability_reason": "ok",
+            "simulated_training_time": 0.0417,
+            "simulated_communication_time": 0.0339,
+            "total_client_time": 0.0755
+          }
+        ]
+      }
+    }
+  ]
+}

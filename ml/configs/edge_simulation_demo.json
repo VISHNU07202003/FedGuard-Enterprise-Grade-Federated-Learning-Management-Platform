@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "seed": 42,
+  "profiles": {
+    "client_000": "industrial_gateway",
+    "client_001": "smart_factory_sensor",
+    "client_002": "building_controller",
+    "client_003": "edge_cluster",
+    "client_004": "low_power_iot_node",
+    "client_005": "mobile_edge_node",
+    "client_006": "industrial_gateway",
+    "client_007": "smart_factory_sensor",
+    "client_008": "edge_cluster",
+    "client_009": "low_power_iot_node"
+  }
+}

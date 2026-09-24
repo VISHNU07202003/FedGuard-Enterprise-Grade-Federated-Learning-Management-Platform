@@ -1,0 +1,122 @@
+services:
+  # ---------------------------------------------------------------------------
+  # Frontend — React + Vite
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_PROXY_TARGET=http://backend:8000
+    depends_on:
+      - backend
+
+  # ---------------------------------------------------------------------------
+  # Backend — FastAPI
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Flower Federation — SuperLink
+  # ---------------------------------------------------------------------------
+  flower-superlink:
+    image: flwr/superlink:1.9.0
+    command: --insecure
+    ports:
+      - "9091:9091" # Driver API
+      - "9092:9092" # Fleet API
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9091"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Flower Federation — SuperNodes (Clients)
+  # ---------------------------------------------------------------------------
+  flower-supernode-1:
+    image: flwr/supernode:1.9.0
+    command: --insecure --superlink "flower-superlink:9092" --node-config "partition-id=1" --clientappio-api-address "0.0.0.0:9094"
+    depends_on:
+      flower-superlink:
+        condition: service_healthy
+
+  flower-supernode-2:
+    image: flwr/supernode:1.9.0
+    command: --insecure --superlink "flower-superlink:9092" --node-config "partition-id=2" --clientappio-api-address "0.0.0.0:9095"
+    depends_on:
+      flower-superlink:
+        condition: service_healthy
+
+  flower-supernode-3:
+    image: flwr/supernode:1.9.0
+    command: --insecure --superlink "flower-superlink:9092" --node-config "partition-id=3" --clientappio-api-address "0.0.0.0:9096"
+    depends_on:
+      flower-superlink:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # Optional MLflow Tracking Server
+  # ---------------------------------------------------------------------------
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    ports:
+      - "5000:5000"
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --default-artifact-root /mlflow/artifacts
+      --host 0.0.0.0
+      --port 5000
+    volumes:
+      - ./mlruns:/mlflow
+
+
+  # ---------------------------------------------------------------------------
+  # Prometheus
+  # ---------------------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    depends_on:
+      - backend
+
+  # ---------------------------------------------------------------------------
+  # Grafana
+  # ---------------------------------------------------------------------------
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards

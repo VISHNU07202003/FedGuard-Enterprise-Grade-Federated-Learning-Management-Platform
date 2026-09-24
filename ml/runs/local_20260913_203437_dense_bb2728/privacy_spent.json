@@ -1,0 +1,8 @@
+{
+  "epsilon_spent": 5.15863635357371,
+  "delta": 1e-05,
+  "accountant": "rdp",
+  "noise_multiplier": 1.0,
+  "max_grad_norm": 1.0,
+  "formal_accounting": true
+}

@@ -1,0 +1,7 @@
+{
+    "mlflow_run_id": "f9fa07ba1c7f4f4c8430487bd3d83c92",
+    "mlflow_experiment_id": "673044286332389729",
+    "tracking_uri": "file:./mlruns",
+    "experiment_name": "FedGuard",
+    "run_name": "local_dense_client_001_seed42"
+}

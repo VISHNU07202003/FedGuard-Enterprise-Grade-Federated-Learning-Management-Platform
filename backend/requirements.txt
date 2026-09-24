@@ -1,0 +1,5 @@
+opacus
+passlib
+bcrypt
+PyJWT
+boto3==1.35.34

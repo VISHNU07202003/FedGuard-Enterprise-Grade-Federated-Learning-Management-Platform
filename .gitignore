@@ -1,0 +1,84 @@
+# FedGuard
+node_modules/
+dist/
+build/
+.next/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+*.egg
+.eggs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment
+.env
+.env.local
+.env.*.local
+**/.env.development
+**/.env.production
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Data — never commit datasets
+data/
+*.csv
+*.parquet
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.sqlite3
+
+# Model artifacts
+*.pt
+*.pth
+*.onnx
+*.pkl
+models/saved/
+
+# Logs
+*.log
+logs/
+
+# Alembic
+alembic/versions/*.pyc
+
+# Prometheus / Grafana
+grafana-data/
+prometheus-data/
+
+# Implementation plans (keep in repo or not — user preference)
+# FedGuard_Antigravity_Implementation_Plan*.md
