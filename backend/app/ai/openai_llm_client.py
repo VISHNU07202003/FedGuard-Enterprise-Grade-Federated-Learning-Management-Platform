@@ -24,8 +24,8 @@ class OpenAILLMClient(LLMClient):
             base_url=base_url if base_url else None
         )
         
-        # Use Bedrock model ID field or fallback to mistral as a default model name
-        self.model = settings.AWS_BEDROCK_MODEL_ID or "mistral"
+        # Support explicit model name via LLM_MODEL, or fallback to mistral-small-3.1
+        self.model = settings.LLM_MODEL or "mistral-small-3.1"
 
     async def generate(self, messages: List[Dict[str, str]], system_prompt: str, max_tokens: int, temperature: float) -> Dict[str, Any]:
         

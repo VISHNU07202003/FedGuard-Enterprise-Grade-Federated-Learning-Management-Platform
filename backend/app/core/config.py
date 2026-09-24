@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "mock"
     LLM_API_KEY: str | None = None
     LLM_API_BASE: str | None = None
+    LLM_MODEL: str | None = None
     
     COPILOT_MAX_CONTEXT_TOKENS: int = 6000
     COPILOT_MAX_RESPONSE_TOKENS: int = 800

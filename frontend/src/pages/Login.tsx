@@ -5,7 +5,7 @@ import { useAuth } from '../features/auth/AuthContext';
 
 export default function Login() {
   const [email, setEmail] = useState('admin@fedguard.dev');
-  const [password, setPassword] = useState('password123');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -98,13 +98,6 @@ export default function Login() {
               </button>
             </div>
           </form>
-          
-          <div className="mt-6 text-xs text-gray-500 text-center space-y-1">
-            <p>Admin: admin@fedguard.dev</p>
-            <p>Researcher: researcher@fedguard.dev</p>
-            <p>Viewer: viewer@fedguard.dev</p>
-            <p>Pass: password123</p>
-          </div>
         </div>
       </div>
     </div>

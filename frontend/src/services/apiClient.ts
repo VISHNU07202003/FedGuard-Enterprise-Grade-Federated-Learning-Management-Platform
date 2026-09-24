@@ -79,7 +79,13 @@ export const dashboardService = {
       };
     }
     
-    const response = await fetch(`${API_URL}/api/v1/dashboard`);
+    const token = localStorage.getItem('token');
+
+const response = await fetch(`${API_URL}/api/v1/dashboard/`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
     if (!response.ok) {
       throw new Error(`API Error: ${response.status}`);
     }

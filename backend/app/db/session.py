@@ -9,7 +9,12 @@ def get_engine():
     global _engine, _sessionmaker
     if _engine is None:
         db_url = get_secret("DATABASE_URL")
-        _engine = create_async_engine(db_url, echo=False)
+        _engine = create_async_engine(
+            db_url,
+            echo=False,
+            pool_pre_ping=True,
+            pool_recycle=300
+        )
         _sessionmaker = async_sessionmaker(_engine, class_=AsyncSession, expire_on_commit=False)
     return _sessionmaker
 
