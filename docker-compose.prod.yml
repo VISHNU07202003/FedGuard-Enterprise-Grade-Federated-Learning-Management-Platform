@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     image: fedguard-backend:prod
     restart: unless-stopped
+    env_file:
+      - .env.production
     ports:
       - "127.0.0.1:8000:8000"
     environment:
@@ -16,7 +18,7 @@ services:
       # - S3_ARTIFACT_BUCKET=my-fedguard-bucket
       # - DATABASE_URL=postgresql+asyncpg://fedguard:fedguard@neon-db-url:5432/fedguard
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
       timeout: 10s
       retries: 3
