@@ -8,8 +8,9 @@ const Progress = React.forwardRef<
 >(({ className, value, indicatorClassName, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
+    value={value}
     className={cn(
-      "relative h-2 w-full overflow-hidden rounded-full bg-slate-100",
+      "relative h-2 w-full overflow-hidden rounded-full bg-muted",
       className
     )}
     {...props}

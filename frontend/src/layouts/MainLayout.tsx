@@ -1,131 +1,60 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Activity, 
-  Users, 
-  Network, 
-  FlaskConical, 
-  Box, 
-  ShieldCheck, 
-  Bot, 
-  Settings,
-  LogOut
-} from 'lucide-react';
+import { useState } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { LayoutDashboard, Activity, Users, Network, FlaskConical, Box, ShieldCheck, Bot, Settings, LogOut, Menu, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/features/auth/AuthContext';
 
-interface SidebarItemProps {
-  to: string;
-  icon: React.ReactNode;
-  label: string;
-  end?: boolean;
-}
-
-function SidebarItem({ to, icon, label, end }: SidebarItemProps) {
-  return (
-    <NavLink
-      to={to}
-      end={end}
-      className={({ isActive }) => cn(
-        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-        isActive 
-          ? "bg-white shadow-sm text-primary" 
-          : "text-muted-foreground hover:bg-slate-100 hover:text-foreground"
-      )}
-    >
-      {({ isActive }) => (
-        <>
-          {React.cloneElement(icon as React.ReactElement, { 
-            className: cn("w-5 h-5 transition-colors", isActive ? "text-primary" : "text-muted-foreground") 
-          })}
-          {label}
-        </>
-      )}
-    </NavLink>
-  );
-}
+const groups = [
+  { label: 'Federation', items: [
+    { to: '/', label: 'Overview', icon: LayoutDashboard },
+    { to: '/training', label: 'Training runs', icon: Activity },
+    { to: '/clients', label: 'Edge clients', icon: Users },
+    { to: '/topology', label: 'Network topology', icon: Network },
+  ] },
+  { label: 'Intelligence & operations', items: [
+    { to: '/experiments', label: 'Experiments', icon: FlaskConical },
+    { to: '/models', label: 'Model registry', icon: Box },
+    { to: '/security', label: 'Security', icon: ShieldCheck },
+    { to: '/observability', label: 'Observability', icon: Activity },
+    { to: '/copilot', label: 'AI Copilot', icon: Bot },
+    { to: '/settings', label: 'Settings', icon: Settings },
+  ] },
+];
 
 export function MainLayout() {
   const { user, logout } = useAuth();
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const current = groups.flatMap(group => group.items).find(item => item.to === pathname)?.label || 'Training details';
   return (
-    <div className="flex h-screen bg-background text-foreground font-sans">
-      
-      {/* Sidebar */}
-      <aside className="w-64 flex flex-col border-r border-border bg-background/50 backdrop-blur-xl shrink-0">
-        <div className="p-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-sm">
-              <ShieldCheck className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold tracking-tight leading-none text-foreground">FedGuard</h1>
-              <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mt-1">Platform</p>
-            </div>
-          </div>
+    <div className="app-shell">
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <aside className="app-sidebar">
+        <div className="flex items-center justify-between p-5">
+          <NavLink to="/" className="flex items-center gap-3" aria-label="FedGuard overview">
+            <span className="rounded-xl border border-primary/30 bg-primary/10 p-2 text-primary"><ShieldCheck size={24} /></span>
+            <span><span className="block text-lg font-semibold tracking-tight">FedGuard</span><span className="eyebrow">Federated intelligence</span></span>
+          </NavLink>
+          <button className="icon-button lg:hidden" aria-label="Toggle navigation" aria-expanded={menuOpen} aria-controls="platform-navigation" onClick={() => setMenuOpen(!menuOpen)}><Menu size={20} /></button>
         </div>
-
-        <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
-          <SidebarItem to="/" icon={<LayoutDashboard />} label="Dashboard" end />
-          <SidebarItem to="/training" icon={<Activity />} label="Training Runs" />
-          <SidebarItem to="/clients" icon={<Users />} label="Clients" />
-          <SidebarItem to="/topology" icon={<Network />} label="Topology" />
-          <SidebarItem to="/experiments" icon={<FlaskConical />} label="Experiments" />
-          <SidebarItem to="/models" icon={<Box />} label="Model Registry" />
-          <SidebarItem to="/security" icon={<ShieldCheck />} label="Security" />
-          <SidebarItem to="/observability" icon={<Activity />} label="Observability" />
-          <SidebarItem to="/copilot" icon={<Bot />} label="Copilot" />
+        <nav id="platform-navigation" aria-label="Platform" className={cn('sidebar-navigation', menuOpen ? 'block' : 'hidden lg:block')} onKeyDown={event => { if (event.key === 'Escape') setMenuOpen(false); }}>
+          {groups.map(group => <div key={group.label} className="mb-6">
+            <p className="eyebrow px-3 mb-2">{group.label}</p>
+            {group.items.map(({ to, label, icon: Icon }) => <NavLink key={to} to={to} end={to === '/'} onClick={() => setMenuOpen(false)} className={({ isActive }) => cn('nav-item', isActive && 'nav-item-active')}><Icon size={18} aria-hidden="true" />{label}</NavLink>)}
+          </div>)}
         </nav>
-
-        <div className="p-4 border-t border-border">
-          <SidebarItem to="/settings" icon={<Settings />} label="Settings" />
-        </div>
+        <div className="mt-auto hidden lg:block border-t border-border p-5 text-xs leading-relaxed text-muted-foreground">Distributed Intelligence.<br /><span className="text-foreground">Private by Design.</span></div>
       </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        
-        {/* Topbar */}
-        <header className="h-16 flex items-center justify-between px-8 border-b border-border/50 bg-card/50 backdrop-blur-md shrink-0">
-          <div className="flex items-center gap-4">
-            <h2 className="text-xl font-semibold tracking-tight">FedGuard</h2>
-          </div>
-          <div className="flex items-center gap-4">
-            <Badge variant="success" className="gap-1.5 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              System Active
-            </Badge>
-            
-            <div className="h-6 w-px bg-border/60 mx-2"></div>
-            
-            {user && (
-              <div className="flex items-center gap-3">
-                <div className="flex flex-col text-right">
-                  <span className="text-sm font-medium">{user.full_name || user.email}</span>
-                  <span className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">{user.role}</span>
-                </div>
-                <button 
-                  onClick={logout}
-                  className="p-2 rounded-full hover:bg-slate-100 transition-colors text-muted-foreground hover:text-red-500"
-                  title="Logout"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-          </div>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="app-topbar">
+          <div className="flex min-w-0 items-center gap-2 text-sm"><span className="hidden sm:inline text-muted-foreground">Workspace</span><ChevronRight size={14} className="hidden sm:block text-muted-foreground" /><span className="truncate">{current}</span></div>
+          {user && <div className="flex min-w-0 items-center gap-3">
+            <div className="min-w-0 text-right"><p className="max-w-44 truncate text-sm">{user.full_name || user.email}</p><p className="eyebrow">{user.role}</p></div>
+            <button onClick={logout} className="icon-button" aria-label="Sign out" title="Sign out"><LogOut size={18} /></button>
+          </div>}
         </header>
-
-        {/* Page Content with soft fade transition */}
-        <div className="flex-1 overflow-y-auto bg-slate-50">
-          <Outlet />
-        </div>
-      </main>
+        <main id="main-content" tabIndex={-1} className="app-content"><Outlet /></main>
+      </div>
     </div>
   );
 }

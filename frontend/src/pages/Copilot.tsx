@@ -1,8 +1,9 @@
+import { Bot, Send } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { copilotService, CopilotResponse, CopilotContext } from '../services/copilotService';
 
 export function Copilot() {
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string; response?: CopilotResponse }[]>([]);
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string; response?: CopilotResponse; error?: boolean }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ export function Copilot() {
   ];
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
 
   useEffect(() => {
@@ -27,8 +28,8 @@ export function Copilot() {
   }, [messages]);
 
   const handleSend = async (message: string) => {
-    if (!message.trim()) return;
-    
+    if (loading || !message.trim()) return;
+
     const newMessages = [...messages, { role: 'user' as const, content: message }];
     setMessages(newMessages);
     setInput('');
@@ -37,49 +38,48 @@ export function Copilot() {
     try {
       const res = await copilotService.chat(message, activeContext);
       setMessages([...newMessages, { role: 'assistant', content: res.answer, response: res }]);
-    } catch (error: any) {
-      const errorMsg = error.response?.data?.detail || "An error occurred connecting to the Copilot.";
-      setMessages([...newMessages, { role: 'assistant', content: `Error: ${errorMsg}` }]);
+    } catch (error: unknown) {
+      console.error('Copilot request failed', error instanceof Error ? error.message : 'Unexpected error');
+      const errorMsg = 'Copilot could not respond. Check your connection and try sending your question again.';
+      setMessages([...newMessages, { role: 'assistant', content: errorMsg, error: true }]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-80px)] bg-gray-50 p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">FedGuard Copilot</h1>
+    <div className="flex flex-col min-h-[640px] h-[calc(100dvh-136px)]">
+      <div className="flex flex-wrap gap-4 items-center justify-between mb-6">
+        <div><p className="eyebrow mb-2 text-primary">Intelligence / Assistant</p><h1 className="text-3xl font-semibold text-foreground">FedGuard AI Copilot</h1><p className="mt-2 text-sm text-muted-foreground">Powered by UF NaviGator</p></div>
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-500">Context:</span>
-          <input 
-            type="text" 
-            placeholder="Run ID (optional)"
-            className="text-sm border border-gray-300 rounded-md px-3 py-1 focus:ring-2 focus:ring-blue-500 outline-none w-48"
+          <span className="text-sm text-muted-foreground">Context:</span>
+          <input
+            type="text"
+            aria-label="Run context (optional run ID)" placeholder="Run ID (optional)"
+            className="text-sm border border-border rounded-md px-3 py-1 focus:ring-2 focus:ring-blue-500 outline-none w-48"
             onChange={(e) => setActiveContext({ ...activeContext, run_id: e.target.value })}
           />
         </div>
       </div>
 
-      <div className="flex-1 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col overflow-hidden">
+      <div className="flex-1 bg-card border border-border rounded-2xl shadow-sm flex flex-col overflow-hidden">
         {/* Chat History */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div role="log" aria-label="Copilot conversation" aria-live="polite" className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
           {messages.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
-              <div className="bg-blue-50 text-blue-600 p-4 rounded-full">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+            <div className="min-h-full flex flex-col items-center justify-center py-4 text-center space-y-6">
+              <div className="bg-blue-500/10 text-blue-300 p-4 rounded-full">
+                <Bot size={32} />
               </div>
               <div className="space-y-2 max-w-md">
-                <h2 className="text-xl font-medium text-gray-900">How can I help with your federated runs?</h2>
-                <p className="text-sm text-gray-500">I can analyze metrics, explain privacy configurations, and audit reliable client participation.</p>
+                <h2 className="text-xl font-medium text-foreground">How can I help with your federated runs?</h2>
+                <p className="text-sm text-muted-foreground">Explore reported metrics, privacy configurations, and client participation. Add a run ID to focus your question.</p>
               </div>
-              <div className="grid grid-cols-2 gap-3 w-full max-w-2xl mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl mt-4">
                 {suggestions.map((s, i) => (
-                  <button 
-                    key={i} 
+                  <button
+                    key={i}
                     onClick={() => handleSend(s)}
-                    className="text-left p-4 bg-gray-50 hover:bg-gray-100 border border-gray-100 rounded-xl transition-colors text-sm text-gray-700"
+                    className="text-left p-4 bg-muted hover:bg-muted border border-border rounded-xl transition-colors text-sm text-foreground"
                   >
                     {s}
                   </button>
@@ -90,22 +90,22 @@ export function Copilot() {
 
           {messages.map((m, idx) => (
             <div key={idx} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[75%] rounded-2xl p-4 ${
-                m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-50 border border-gray-100 text-gray-800'
+              <div className={`min-w-0 max-w-[95%] sm:max-w-[80%] break-words rounded-2xl p-4 ${
+                m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-muted border border-border text-foreground'
               }`}>
-                <div className="whitespace-pre-wrap text-sm leading-relaxed">{m.content}</div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wider opacity-80">{m.error ? 'Request failed' : m.role === 'user' ? 'You' : 'FedGuard Copilot'}</p><div role={m.error ? 'alert' : undefined} className="whitespace-pre-wrap text-sm leading-relaxed">{m.content}</div>
                 {m.response && (
-                  <div className="mt-4 pt-3 border-t border-gray-200 flex flex-wrap gap-2 items-center">
-                    <span className={`text-xs px-2 py-1 rounded-md font-medium ${m.response.mode === 'bedrock' ? 'bg-purple-100 text-purple-700' : 'bg-orange-100 text-orange-700'}`}>
+                  <div className="mt-4 pt-3 border-t border-border flex flex-wrap gap-2 items-center">
+                    <span className={`text-xs px-2 py-1 rounded-md font-medium ${m.response.mode === 'bedrock' ? 'bg-purple-500/10 text-purple-300' : 'bg-orange-500/10 text-orange-300'}`}>
                       {m.response.mode.toUpperCase()}
                     </span>
                     {m.response.sources.map((src, i) => (
-                      <span key={i} className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-md">
+                      <span key={i} className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md">
                         {src.type}: {src.id}
                       </span>
                     ))}
                     {m.response.warnings.map((warn, i) => (
-                      <span key={`w-${i}`} className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-md">
+                      <span key={`w-${i}`} className="text-xs bg-red-500/10 text-red-300 px-2 py-1 rounded-md">
                         {warn}
                       </span>
                     ))}
@@ -115,8 +115,8 @@ export function Copilot() {
             </div>
           ))}
           {loading && (
-            <div className="flex justify-start">
-              <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex items-center space-x-2">
+            <div role="status" aria-label="Copilot is preparing a response" className="flex justify-start">
+              <div className="bg-muted border border-border rounded-2xl p-4 flex items-center space-x-2">
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
@@ -127,25 +127,23 @@ export function Copilot() {
         </div>
 
         {/* Input Area */}
-        <div className="p-4 bg-white border-t border-gray-100">
+        <div className="p-4 bg-card border-t border-border">
           <div className="relative flex items-center">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend(input)}
-              placeholder="Ask Copilot about a run, metric, or privacy setting..."
-              className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-2 focus:ring-blue-500 outline-none pl-6 pr-14 py-4 shadow-sm"
+              onKeyDown={(e) => e.key === 'Enter' && !e.nativeEvent.isComposing && handleSend(input)}
+              aria-label="Message FedGuard Copilot" placeholder="Ask Copilot about a run, metric, or privacy setting..."
+              className="w-full bg-muted border border-border text-foreground text-sm rounded-full focus:ring-2 focus:ring-blue-500 outline-none pl-6 pr-14 py-4 shadow-sm"
               disabled={loading}
             />
             <button
-              onClick={() => handleSend(input)}
+              aria-label="Send message" onClick={() => handleSend(input)}
               disabled={loading || !input.trim()}
               className="absolute right-3 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors disabled:opacity-50"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-              </svg>
+              <Send size={16} />
             </button>
           </div>
         </div>
