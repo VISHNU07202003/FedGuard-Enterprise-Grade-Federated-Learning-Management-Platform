@@ -103,8 +103,8 @@ export function Topology() {
                      <Server size={18} color={isOnline ? nodeColor : '#94a3b8'} />}
                   </div>
                 </foreignObject>
-                <text y="40" textAnchor="middle" className="text-xs font-medium fill-foreground">{client.client_id.substring(0, 8)}</text>
-                <text y="54" textAnchor="middle" className="text-[10px] fill-muted-foreground capitalize">{client.device_type || 'Unknown'}</text>
+                <text y="40" textAnchor="middle" className="text-xs font-medium fill-foreground">{client.client_id}</text>
+                <text y="54" textAnchor="middle" className="text-[10px] fill-muted-foreground capitalize">{client.device_type || 'Unavailable'}</text>
               </g>
             );
           })}
