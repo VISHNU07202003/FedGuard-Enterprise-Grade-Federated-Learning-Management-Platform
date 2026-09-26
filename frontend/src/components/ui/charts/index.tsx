@@ -62,7 +62,7 @@ interface PerformanceLineChartProps {
 }
 
 export function PerformanceLineChart({ data, dataKeyX, lines }: PerformanceLineChartProps) {
-  if (!data.length) return <DataState title="No measurements yet" description="Reported measurements will appear here when available." />;
+  if (!data?.length) return <DataState title="No measurements yet" description="Reported measurements will appear here when available." />;
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart accessibilityLayer data={data} margin={{ top: 5, right: 10, left: 0, bottom: 12 }}>
@@ -109,7 +109,7 @@ interface AnomalyAreaChartProps {
 }
 
 export function AnomalyAreaChart({ data, dataKeyX, dataKeyY, color = "#ef4444", name = "Volume" }: AnomalyAreaChartProps) {
-  if (!data.length) return <DataState title="No measurements yet" description="Reported measurements will appear here when available." />;
+  if (!data?.length) return <DataState title="No measurements yet" description="Reported measurements will appear here when available." />;
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart accessibilityLayer data={data} margin={{ top: 5, right: 10, left: 0, bottom: 12 }}>

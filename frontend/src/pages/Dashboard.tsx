@@ -55,11 +55,11 @@ export function Dashboard() {
     kpi_metrics,
     current_training_run,
     client_health_summary,
-    model_performance_series: rounds,
-    anomalies,
-    recent_security_events: securityEvents,
-    recent_experiments: experiments,
-    service_health: systemStatus
+    model_performance_series: rounds = [],
+    anomalies = [],
+    recent_security_events: securityEvents = [],
+    recent_experiments: experiments = [],
+    service_health: systemStatus = []
   } = data;
 
   return (
