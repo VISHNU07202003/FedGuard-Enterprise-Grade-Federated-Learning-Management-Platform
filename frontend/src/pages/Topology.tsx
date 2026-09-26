@@ -16,7 +16,7 @@ export function Topology() {
       try {
         const token = localStorage.getItem('token');
         const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await fetch(`${API_URL}/api/v1/clients`, { headers });
+        const response = await fetch(`${API_URL}/api/v1/clients/`, { headers });
         if (response.ok) {
           setClients(await response.json());
         } else {

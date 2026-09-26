@@ -20,7 +20,7 @@ export function Clients() {
   useEffect(() => {
     async function load() {
       try {
-        const response = await axios.get('/api/v1/clients');
+        const response = await axios.get('/api/v1/clients/');
         setClients(response.data);
       } catch (e) {
         console.error(e);
